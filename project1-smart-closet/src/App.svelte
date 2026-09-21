@@ -1,89 +1,68 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from './assets/vite.svg'
-  import heroImg from './assets/hero.png'
-  import Counter from './lib/Counter.svelte'
+  let showInfo = false;
+
+  function toggleInfo() {
+    showInfo = !showInfo;
+  }
 </script>
 
-<section id="center">
-  <div class="hero">
-    <img src={heroImg} class="base" width="170" height="179" alt="" />
-    <img src={svelteLogo} class="framework" alt="Svelte logo" />
-    <img src={viteLogo} class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/App.svelte</code> and save to test <code>HMR</code></p>
-  </div>
-  <Counter />
-</section>
+<main>
+  <header>
+    <h1>Smart Closet</h1>
+    <p>by Salwa Syed</p>
+    <p><a href="#">Project Write-Up (link coming soon)</a></p>
+  </header>
 
-<div class="ticks"></div>
+  <div class="layout">
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true">
-      <use href="/icons.svg#documentation-icon"></use>
-    </svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank" rel="noreferrer">
-          <img class="logo" src={viteLogo} alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://svelte.dev/" target="_blank" rel="noreferrer">
-          <img class="button-icon" src={svelteLogo} alt="" />
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true">
-      <use href="/icons.svg#social-icon"></use>
-    </svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li>
-        <a href="https://github.com/vitejs/vite" target="_blank" rel="noreferrer">
-          <svg class="button-icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#github-icon"></use>
-          </svg>
-          GitHub
-        </a>
-      </li>
-      <li>
-        <a href="https://chat.vite.dev/" target="_blank" rel="noreferrer">
-          <svg class="button-icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#discord-icon"></use>
-          </svg>
-          Discord
-        </a>
-      </li>
-      <li>
-        <a href="https://x.com/vite_js" target="_blank" rel="noreferrer">
-          <svg class="button-icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#x-icon"></use>
-          </svg>
-          X.com
-        </a>
-      </li>
-      <li>
-        <a href="https://bsky.app/profile/vite.dev" target="_blank" rel="noreferrer">
-          <svg class="button-icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#bluesky-icon"></use>
-          </svg>
-          Bluesky
-        </a>
-      </li>
-    </ul>
-  </div>
-</section>
+    <!-- device ui region -->
+    <section class="device-ui">
+      <h2>Device UI (Closet Interface)</h2>
+      <p><em>This is where the closet's own controls and display will go.</em></p>
+      <!-- level 1+ controls will be added here -->
+    </section>
 
-<div class="ticks"></div>
-<section id="spacer"></section>
+    <!-- testing/info region -->
+    <section class="testing-ui">
+      <h2>Testing Panel</h2>
+
+      <button on:click={toggleInfo}>Info</button>
+      {#if showInfo}
+        <p>
+          This panel lets you simulate using the smart closet.
+          Use the buttons here to trigger changes (like turning
+          on the light or opening the closet door) and watch the
+          Device UI on the left respond.
+        </p>
+      {/if}
+
+      <!-- test buttons for level 1+ will be added here -->
+    </section>
+
+  </div>
+</main>
+
+<style>
+  main {
+    font-family: sans-serif;
+    padding: 20px;
+  }
+  .layout {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .device-ui, .testing-ui {
+    border: 2px solid #444;
+    border-radius: 10px;
+    padding: 15px;
+    flex: 1;
+    min-height: 300px;
+  }
+  .device-ui {
+    background-color: #f4f4f4;
+  }
+  .testing-ui {
+    background-color: #eef6ff;
+  }
+</style>
