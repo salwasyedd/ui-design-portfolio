@@ -24,9 +24,9 @@ portable object. It is built into the physical structure of a home. Its affordan
 1. Walk me through how you use your closet on a typical morning.
 2. How do you decide what to wear each day?
 3. How do you keep track of what's clean, what needs washing, or what's in between?
-4. How organized, how full, etc. is your closet?
-5. What would you say the ideal temperature and humidity is for a closet, if you had to guess?
-6. Imagine your closet could sense and report things about itself — like temperature, humidity, or how often items are used. What kinds of information would be useful to you, if any?
+4. Describe your closet, how organized, how full, etc. is your it?
+5. What would you say the ideal temperature is for a closet?
+6. Imagine your closet could sense and report things about itself, what kinds of information would be useful to you, if any?
 7. What kinds of information would you rather it not track or show, if any?
 8. If your closet had a screen or panel on it, how big and where would you want it?
 9. Is there anything else about how you use or organize your closet worth mentioning?
