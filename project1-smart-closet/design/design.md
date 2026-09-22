@@ -24,7 +24,7 @@ portable object. It is built into the physical structure of a home. Its affordan
 1. Walk me through how you use your closet on a typical morning.
 2. How do you decide what to wear each day?
 3. How do you keep track of what's clean, what needs washing, or what's in between?
-4. Describe your closet, how organized, how full, etc. is your it?
+4. Describe your closet, how organized, how full, etc. is it?
 5. What would you say the ideal temperature is for a closet?
 6. Imagine your closet could sense and report things about itself, what kinds of information would be useful to you, if any?
 7. What kinds of information would you rather it not track or show, if any?
@@ -95,4 +95,4 @@ Desired feature depth varied: one wanted just the basics (weather, usage stats),
 | Users want a compact interface that doesn't dominate the space | Panel should be small (tablet/iPad-mini sized) |
 | Users want the panel accessible before entering the closet | Primary panel must be mounted outside/near the entry, not deep inside |
 | Some users want closet data extended to their phone | System should support (or at least conceptually allow for) a companion mobile app view |
-| Some users want minimal tracking
+| Some users want minimal tracking (just weather/basic stats), not a fully automated experience | Deeper features (inventory, filtering, recommendations) should be optional/secondary, not forced on the main screen |
