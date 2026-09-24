@@ -10,7 +10,8 @@
   <header>
     <h1>Smart Closet</h1>
     <p>by Salwa Syed</p>
-    <p><a href="#">Project Write-Up (link coming soon)</a></p>
+    <img src="/src/lib/closet-placement.DNG" alt="Diagram showing UI panel placement on the outside of the closet door" style="max-width: 200px; display: block; margin-bottom: 10px;">
+    <p><a href="https://github.com/salwasyedd/ui-design-portfolio/blob/main/project1-smart-closet/design/design.md" target="_blank">Project Write-Up</a></p>
   </header>
 
   <div class="layout">
