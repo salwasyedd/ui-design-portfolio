@@ -108,3 +108,12 @@ Explored ideas across three design challenges: displaying weather + outfit sugge
 Combined the refined ideas into one full panel layout for the outside closet door: weather and outfit suggestion at top, a scrollable laundry status list (to accommodate many clothing categories), and a "Build an Outfit" button that opens a separate catalog screen with tag-style filters (shown as ovals with an "x" to remove, similar to filters on a shopping site).
 
 ![Vanilla sketch](sketches/vanilla-sketch.DNG)
+
+## Evaluation: Vanilla Sketch Feedback
+
+**Hana:** The weather and outfit suggestion box is exactly what I wanted: simple, quick to glance at. I'm less sure I need the laundry status section to be this detailed becaus I don't track my clothes that closely, so a shorter version might suit me better. The "Build an Outfit" flow with tags looks useful for occasionally finding things to give away, but I probably wouldn't use the filtering as often as someone with a bigger wardrobe.
+
+**Shahar:** This is close to what I pictured. I like that the laundry status scrolls since I have a lot of categories to
+track. The tag filters with an X to remove them feel intuitive, like shopping online. One thing I'd still want is the outfit recommendation to actually show me a photo of items together, not just list them, that was important to me in the interview.
+
+**Ekra:** I really like the laundry alert idea, especially for catching low socks/underwear before it's a problem. The tag-based catalog looks close to how Whering works, which I already like. My one note is I'd still want this connected to a phone app eventually, since that's how I'd actually check it most days rather than walking up to the closet.
