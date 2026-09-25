@@ -117,3 +117,9 @@ Combined the refined ideas into one full panel layout for the outside closet doo
 track. The tag filters with an X to remove them feel intuitive, like shopping online. One thing I'd still want is the outfit recommendation to actually show me a photo of items together, not just list them, that was important to me in the interview.
 
 **Ekra:** I really like the laundry alert idea, especially for catching low socks/underwear before it's a problem. The tag-based catalog looks close to how Whering works, which I already like. My one note is I'd still want this connected to a phone app eventually, since that's how I'd actually check it most days rather than walking up to the closet.
+
+### Hybrid Sketch
+UI integrated onto the physical closet door, showing how the panel would
+actually appear in context.
+
+![Hybrid sketch](sketches/hybrid-sketch.jpg)
