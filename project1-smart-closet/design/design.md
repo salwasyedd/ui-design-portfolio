@@ -107,7 +107,7 @@ Explored ideas across three design challenges: displaying weather + outfit sugge
 ### Vanilla Sketch
 Combined the refined ideas into one full panel layout for the outside closet door: weather and outfit suggestion at top, a scrollable laundry status list (to accommodate many clothing categories), and a "Build an Outfit" button that opens a separate catalog screen with tag-style filters (shown as ovals with an "x" to remove, similar to filters on a shopping site).
 
-![Vanilla sketch](sketches/vanilla-sketch.DNG)
+![Vanilla sketch](sketches/vanilla-sketch.jpeg)
 
 ## Evaluation: Vanilla Sketch Feedback
 
