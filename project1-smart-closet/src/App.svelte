@@ -35,6 +35,39 @@
     const random = suggestions[Math.floor(Math.random() * suggestions.length)];
     currentSuggestion = random;
   }
+
+
+  let laundry = [
+    { category: "Socks", clean: 3, dirty: 2 },
+    { category: "Shirts", clean: 6, dirty: 1 },
+    { category: "Sweatpants", clean: 1, dirty: 3 },
+    { category: "Jeans", clean: 2, dirty: 1 },
+    { category: "Underwear", clean: 4, dirty: 0 },
+    { category: "Jackets", clean: 2, dirty: 0 }
+  ];
+
+  const LOW_STOCK_THRESHOLD = 1;
+
+  $: lowStockItems = laundry.filter(item => item.clean <= LOW_STOCK_THRESHOLD);
+
+  function doLaundry() {
+    laundry = laundry.map(item => ({
+      category: item.category,
+      clean: item.clean + item.dirty,
+      dirty: 0
+    }));
+  }
+
+  function simulateWear() {
+    const wearable = laundry.filter(item => item.clean > 0);
+    if (wearable.length === 0) return;
+    const pick = wearable[Math.floor(Math.random() * wearable.length)];
+    laundry = laundry.map(item =>
+      item.category === pick.category
+        ? { ...item, clean: item.clean - 1, dirty: item.dirty + 1 }
+        : item
+    );
+  }
 </script>
 
 <main>
@@ -63,7 +96,7 @@
     <p class="greeting">{getGreeting()}</p>
 
     <!-- device ui region -->
-    <section class="device-ui">
+    <section class="device-ui weather-panel">
       <div class="weather-row">
         <div class="weather-info">
           <div class="temp-row">
@@ -78,8 +111,32 @@
           <p class="outfit-name">{currentSuggestion.outfit}</p>
         </div>
       </div>
+    </section>
 
-      <!-- level 1+ controls will be added here -->
+      <section class="device-ui laundry-panel">
+        <div class="laundry-section">
+          <div class="laundry-header">
+            <p class="section-label">Laundry Status</p>
+            <span class="status-dot" class:low={lowStockItems.length > 0}></span>
+          </div>
+
+          <div class="laundry-list">
+          {#each laundry as item}
+            <div class="laundry-row">
+              <span class="laundry-category">{item.category}</span>
+              <span class="laundry-counts">{item.clean} clean, {item.dirty} dirty</span>
+            </div>
+          {/each}
+        </div>
+
+        {#if lowStockItems.length > 0}
+          <p class="laundry-alert">
+            Low on: {lowStockItems.map(i => i.category).join(", ")}
+          </p>
+        {/if}
+      </div>
+
+      <!-- level 2+ controls will be added here -->
     </section>
 
     <div class="testing-toggle-row">
@@ -95,6 +152,8 @@
         <div class="testing-controls">
           <button class="btn-secondary" on:click={toggleInfo}>Info</button>
           <button class="btn-primary" on:click={getNewSuggestion}>Simulate Weather Change</button>
+          <button class="btn-primary" on:click={simulateWear}>Simulate Wearing an Item</button>
+          <button class="btn-primary" on:click={doLaundry}>Do Laundry</button>
         </div>
 
         {#if showInfo}
@@ -325,4 +384,69 @@
     margin-top: 14px;
     line-height: 1.5;
   }
+
+  .laundry-section {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #D8CFBE;
+}
+
+.laundry-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #8A8072;
+  margin: 0;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #6B7059;
+}
+
+.status-dot.low {
+  background-color: #B25D45;
+}
+
+.laundry-list {
+  max-height: 130px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.laundry-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #3A322C;
+  padding: 6px 0;
+  border-bottom: 1px solid #EDE7DC;
+}
+
+.laundry-counts {
+  color: #5C5449;
+}
+
+.laundry-alert {
+  font-size: 13px;
+  color: #B25D45;
+  margin-top: 10px;
+}
+.weather-panel {
+  margin-bottom: 20px;
+}
+
+.laundry-section {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
 </style>
