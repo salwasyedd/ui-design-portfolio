@@ -23,10 +23,30 @@
   }
 
   const suggestions = [
-    { temp: 45, text: "It's chilly: wear the gray hoodie.", outfit: "Gray hoodie + jeans" },
-    { temp: 62, text: "Mild out: a light jacket works.", outfit: "Light jacket + tee" },
-    { temp: 78, text: "Warm today: go with a t-shirt.", outfit: "White t-shirt + shorts" },
-    { temp: 33, text: "Cold! Grab the winter coat.", outfit: "Winter coat + scarf" }
+    {
+      temp: 45,
+      text: "It's chilly: wear the gray hoodie.",
+      outfit: "Gray hoodie + jeans",
+      img: "/src/lib/catalog/gray-hoodie.jpg",
+    },
+    {
+      temp: 62,
+      text: "Mild out: a light sweater works.",
+      outfit: "Green sweater + jeans",
+      img: "/src/lib/catalog/green-sweater.jpg",
+    },
+    {
+      temp: 78,
+      text: "Warm today: go with a t-shirt.",
+      outfit: "White t-shirt + shorts",
+      img: "/src/lib/catalog/white-tshirt.jpg",
+    },
+    {
+      temp: 33,
+      text: "Cold! Grab the winter coat.",
+      outfit: "Winter coat + scarf",
+      img: "/src/lib/catalog/winter-coat.jpg",
+    },
   ];
 
   let currentSuggestion = suggestions[0];
@@ -36,86 +56,135 @@
     currentSuggestion = random;
   }
 
-
   let laundry = [
     { category: "Socks", clean: 3, dirty: 2 },
     { category: "Shirts", clean: 6, dirty: 1 },
     { category: "Sweatpants", clean: 1, dirty: 3 },
     { category: "Jeans", clean: 2, dirty: 1 },
     { category: "Underwear", clean: 4, dirty: 0 },
-    { category: "Jackets", clean: 2, dirty: 0 }
+    { category: "Jackets", clean: 2, dirty: 0 },
   ];
 
   const LOW_STOCK_THRESHOLD = 1;
 
-  $: lowStockItems = laundry.filter(item => item.clean <= LOW_STOCK_THRESHOLD);
+  $: lowStockItems = laundry.filter(
+    (item) => item.clean <= LOW_STOCK_THRESHOLD,
+  );
 
   function doLaundry() {
-    laundry = laundry.map(item => ({
+    laundry = laundry.map((item) => ({
       category: item.category,
       clean: item.clean + item.dirty,
-      dirty: 0
+      dirty: 0,
     }));
   }
 
   function simulateWear() {
-    const wearable = laundry.filter(item => item.clean > 0);
+    const wearable = laundry.filter((item) => item.clean > 0);
     if (wearable.length === 0) return;
     const pick = wearable[Math.floor(Math.random() * wearable.length)];
-    laundry = laundry.map(item =>
+    laundry = laundry.map((item) =>
       item.category === pick.category
         ? { ...item, clean: item.clean - 1, dirty: item.dirty + 1 }
-        : item
+        : item,
     );
   }
 
   // Closet catalog
-const catalogItems = [
-  { name: "Gray Hoodie", tags: ["casual", "winter"], lastWorn: "2 days ago" },
-  { name: "White T-Shirt", tags: ["casual", "summer"], lastWorn: "1 day ago" },
-  { name: "Work Blazer", tags: ["work", "formal"], lastWorn: "1 week ago" },
-  { name: "Blue Jeans", tags: ["casual"], lastWorn: "3 days ago" },
-  { name: "Winter Coat", tags: ["winter", "formal"], lastWorn: "1 month ago" },
-  { name: "Red Sweater", tags: ["red", "winter"], lastWorn: "5 days ago" },
-  { name: "Black Dress Pants", tags: ["work", "formal"], lastWorn: "4 days ago" },
-  { name: "Sneakers", tags: ["casual", "summer"], lastWorn: "today" }
-];
+  const catalogItems = [
+    {
+      name: "Gray Hoodie",
+      tags: ["casual", "winter"],
+      lastWorn: "2 days ago",
+      img: "/src/lib/catalog/gray-hoodie.jpg",
+    },
+    {
+      name: "White T-Shirt",
+      tags: ["casual", "summer"],
+      lastWorn: "1 day ago",
+      img: "/src/lib/catalog/white-tshirt.jpg",
+    },
+    {
+      name: "Work Blazer",
+      tags: ["work", "formal"],
+      lastWorn: "1 week ago",
+      img: "/src/lib/catalog/work-blazer.jpg",
+    },
+    {
+      name: "Blue Jeans",
+      tags: ["casual"],
+      lastWorn: "3 days ago",
+      img: "/src/lib/catalog/blue-jeans.jpg",
+    },
+    {
+      name: "Winter Coat",
+      tags: ["winter", "formal"],
+      lastWorn: "1 month ago",
+      img: "/src/lib/catalog/winter-coat.jpg",
+    },
+    {
+      name: "Green Sweater",
+      tags: ["green", "winter"],
+      lastWorn: "5 days ago",
+      img: "/src/lib/catalog/green-sweater.jpg",
+    },
+    {
+      name: "Black Dress Pants",
+      tags: ["work", "formal"],
+      lastWorn: "4 days ago",
+      img: "/src/lib/catalog/black-dress-pants.jpg",
+    },
+    {
+      name: "Sneakers",
+      tags: ["casual", "summer"],
+      lastWorn: "today",
+      img: "/src/lib/catalog/sneakers.jpg",
+    },
+  ];
 
-let activeTags = [];
-let showCatalog = false;
+  let activeTags = [];
+  let showCatalog = false;
 
-function toggleCatalog() {
-  showCatalog = !showCatalog;
-}
-
-function addTag(tag) {
-  if (!activeTags.includes(tag)) {
-    activeTags = [...activeTags, tag];
+  function toggleCatalog() {
+    showCatalog = !showCatalog;
   }
-}
 
-function removeTag(tag) {
-  activeTags = activeTags.filter(t => t !== tag);
-}
+  function addTag(tag) {
+    if (!activeTags.includes(tag)) {
+      activeTags = [...activeTags, tag];
+    }
+  }
 
-$: filteredItems = activeTags.length === 0
-  ? catalogItems
-  : catalogItems.filter(item => activeTags.every(tag => item.tags.includes(tag)));
+  function removeTag(tag) {
+    activeTags = activeTags.filter((t) => t !== tag);
+  }
 
-$: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
+  $: filteredItems =
+    activeTags.length === 0
+      ? catalogItems
+      : catalogItems.filter((item) =>
+          activeTags.every((tag) => item.tags.includes(tag)),
+        );
+
+  $: allTags = [...new Set(catalogItems.flatMap((item) => item.tags))];
 </script>
 
 <main>
   <div class="page">
-
     <header>
       <div class="title-block">
         <h1>Smart Closet</h1>
         <p class="byline">Salwa Syed</p>
       </div>
       <div class="header-links">
-        <button class="link-btn" on:click={togglePlacement}>Where does this go?</button>
-        <a href="https://github.com/salwasyedd/ui-design-portfolio/blob/main/project1-smart-closet/design/design.md" target="_blank" class="writeup-link">
+        <button class="link-btn" on:click={togglePlacement}
+          >Where does this go?</button
+        >
+        <a
+          href="https://github.com/salwasyedd/ui-design-portfolio/blob/main/project1-smart-closet/design/design.md"
+          target="_blank"
+          class="writeup-link"
+        >
           Project Write-Up
         </a>
       </div>
@@ -123,8 +192,14 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
 
     {#if showPlacement}
       <div class="placement-block">
-        <img src="/src/lib/hybrid-sketch.jpg" alt="Hybrid sketch showing the smart closet UI overlaid on the physical closet door" class="placement-img">
-        <p class="placement-caption">This panel is mounted on the outside of the closet door.</p>
+        <img
+          src="/src/lib/hybrid-sketch.jpg"
+          alt="Hybrid sketch showing the smart closet UI overlaid on the physical closet door"
+          class="placement-img"
+        />
+        <p class="placement-caption">
+          This panel is mounted on the outside of the closet door.
+        </p>
       </div>
     {/if}
 
@@ -142,36 +217,43 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
         </div>
 
         <div class="outfit-box">
+          <img
+            src={currentSuggestion.img}
+            alt={currentSuggestion.outfit}
+            class="outfit-photo"
+          />
           <p class="outfit-label">Suggested Outfit</p>
           <p class="outfit-name">{currentSuggestion.outfit}</p>
         </div>
       </div>
     </section>
 
-      <section class="device-ui laundry-panel">
-        <div class="laundry-section">
-          <div class="laundry-header">
-            <p class="section-label">Laundry Status</p>
-            <span class="status-dot" class:low={lowStockItems.length > 0}></span>
-          </div>
+    <section class="device-ui laundry-panel">
+      <div class="laundry-section">
+        <div class="laundry-header">
+          <p class="section-label">Laundry Status</p>
+          <span class="status-dot" class:low={lowStockItems.length > 0}></span>
+        </div>
 
-          <div class="laundry-list">
+        <div class="laundry-list">
           {#each laundry as item}
             <div class="laundry-row">
               <span class="laundry-category">{item.category}</span>
-              <span class="laundry-counts">{item.clean} clean, {item.dirty} dirty</span>
+              <span class="laundry-counts"
+                >{item.clean} clean, {item.dirty} dirty</span
+              >
             </div>
           {/each}
         </div>
 
         {#if lowStockItems.length > 0}
           <p class="laundry-alert">
-            Low on: {lowStockItems.map(i => i.category).join(", ")}
+            Low on: {lowStockItems.map((i) => i.category).join(", ")}
           </p>
         {/if}
       </div>
 
-    <!-- level 2+ controls will be added here -->
+      <!-- level 2+ controls will be added here -->
     </section>
 
     <div class="testing-toggle-row">
@@ -181,41 +263,45 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
     </div>
 
     {#if showCatalog}
-    <section class="device-ui catalog-panel">
-      <p class="section-label">Your Closet</p>
+      <section class="device-ui catalog-panel">
+        <p class="section-label">Your Closet</p>
 
-      <div class="active-tags">
-        {#each activeTags as tag}
-          <span class="tag-chip active">
-            {tag}
-            <button class="tag-remove" on:click={() => removeTag(tag)}>&times;</button>
-          </span>
-        {/each}
-      </div>
+        <div class="active-tags">
+          {#each activeTags as tag}
+            <span class="tag-chip active">
+              {tag}
+              <button class="tag-remove" on:click={() => removeTag(tag)}
+                >&times;</button
+              >
+            </span>
+          {/each}
+        </div>
 
-      <div class="tag-options">
-        {#each allTags as tag}
-          {#if !activeTags.includes(tag)}
-            <button class="tag-chip" on:click={() => addTag(tag)}>{tag}</button>
-          {/if}
-        {/each}
-      </div>
+        <div class="tag-options">
+          {#each allTags as tag}
+            {#if !activeTags.includes(tag)}
+              <button class="tag-chip" on:click={() => addTag(tag)}
+                >{tag}</button
+              >
+            {/if}
+          {/each}
+        </div>
 
-      <div class="catalog-grid">
-        {#each filteredItems as item}
-          <div class="catalog-item">
-            <div class="item-photo-placeholder"></div>
-            <p class="item-name">{item.name}</p>
-            <p class="item-last-worn">Last worn: {item.lastWorn}</p>
-          </div>
-        {/each}
-      </div>
+        <div class="catalog-grid">
+          {#each filteredItems as item}
+            <div class="catalog-item">
+              <img src={item.img} alt={item.name} class="item-photo" />
+              <p class="item-name">{item.name}</p>
+              <p class="item-last-worn">Last worn: {item.lastWorn}</p>
+            </div>
+          {/each}
+        </div>
 
-      {#if filteredItems.length === 0}
-        <p class="no-results">No items match these tags.</p>
-      {/if}
-    </section>
-  {/if}
+        {#if filteredItems.length === 0}
+          <p class="no-results">No items match these tags.</p>
+        {/if}
+      </section>
+    {/if}
 
     <div class="testing-toggle-row">
       <button class="link-btn" on:click={toggleTestingMode}>
@@ -229,33 +315,36 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
 
         <div class="testing-controls">
           <button class="btn-secondary" on:click={toggleInfo}>Info</button>
-          <button class="btn-primary" on:click={getNewSuggestion}>Simulate Weather Change</button>
-          <button class="btn-primary" on:click={simulateWear}>Simulate Wearing an Item</button>
+          <button class="btn-primary" on:click={getNewSuggestion}
+            >Simulate Weather Change</button
+          >
+          <button class="btn-primary" on:click={simulateWear}
+            >Simulate Wearing an Item</button
+          >
           <button class="btn-primary" on:click={doLaundry}>Do Laundry</button>
         </div>
 
         {#if showInfo}
           <p class="info-text">
-            This panel simulates using the smart closet. Trigger changes
-            here and watch the Device UI above respond.
+            This panel simulates using the smart closet. Trigger changes here
+            and watch the Device UI above respond.
           </p>
         {/if}
 
         <!-- test buttons for level 1+ will be added here -->
       </aside>
     {/if}
-
   </div>
 </main>
 
 <style>
   :global(body) {
     margin: 0;
-    background-color: #EDE7DC;
+    background-color: #ede7dc;
   }
 
   main {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     padding: 48px 24px;
     display: flex;
     justify-content: center;
@@ -270,22 +359,22 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    border-bottom: 1px solid #D8CFBE;
+    border-bottom: 1px solid #d8cfbe;
     padding-bottom: 20px;
     margin-bottom: 32px;
   }
 
   h1 {
-    font-family: 'Fraunces', serif;
+    font-family: "Fraunces", serif;
     font-size: 34px;
     font-weight: 600;
-    color: #3A322C;
+    color: #3a322c;
     margin: 0;
   }
 
   .byline {
     font-size: 14px;
-    color: #8A8072;
+    color: #8a8072;
     margin: 4px 0 0 0;
   }
 
@@ -298,25 +387,25 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
 
   .writeup-link {
     font-size: 13px;
-    color: #6B7059;
+    color: #6b7059;
     text-decoration: none;
-    border-bottom: 1px solid #6B7059;
+    border-bottom: 1px solid #6b7059;
   }
 
   .link-btn {
     background: none;
     border: none;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 13px;
-    color: #8A8072;
+    color: #8a8072;
     text-decoration: underline;
     cursor: pointer;
     padding: 0;
   }
 
   .placement-block {
-    background-color: #FBF9F5;
-    border: 1px solid #D8CFBE;
+    background-color: #fbf9f5;
+    border: 1px solid #d8cfbe;
     border-radius: 12px;
     padding: 16px;
     margin-bottom: 24px;
@@ -332,20 +421,20 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
 
   .placement-caption {
     font-size: 13px;
-    color: #5C5449;
+    color: #5c5449;
     margin: 0;
   }
 
   .greeting {
-    font-family: 'Fraunces', serif;
+    font-family: "Fraunces", serif;
     font-size: 22px;
-    color: #3A322C;
+    color: #3a322c;
     margin: 0 0 16px 0;
   }
 
   .device-ui {
-    background-color: #FBF9F5;
-    border: 1px solid #D8CFBE;
+    background-color: #fbf9f5;
+    border: 1px solid #d8cfbe;
     border-radius: 16px;
     padding: 32px;
   }
@@ -355,7 +444,7 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-}
+  }
 
   .weather-info {
     flex: 1;
@@ -368,44 +457,55 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
   }
 
   .temp {
-    font-family: 'Fraunces', serif;
+    font-family: "Fraunces", serif;
     font-size: 48px;
     font-weight: 500;
-    color: #3A322C;
+    color: #3a322c;
   }
 
   .weather-icon {
     width: 22px;
     height: 22px;
-    border: 2px solid #A9967C;
+    border: 2px solid #a9967c;
     border-radius: 50%;
   }
 
   .suggestion-text {
     font-size: 15px;
-    color: #5C5449;
+    color: #5c5449;
     margin-top: 8px;
   }
 
   .outfit-box {
-    background-color: #EDE7DC;
-    border: 1px solid #D8CFBE;
+    background-color: #ede7dc;
+    border: 1px solid #d8cfbe;
     border-radius: 12px;
     padding: 16px;
     min-width: 150px;
     text-align: center;
   }
 
+  .outfit-photo {
+    width: 100%;
+    max-width: 90px;
+    height: 70px;
+    object-fit: cover;
+    border: 1px solid #d8cfbe;
+    border-radius: 8px;
+    margin: 0 auto 10px auto;
+    display: block;
+  }
+
   .outfit-label {
     font-size: 11px;
     letter-spacing: 0.04em;
-    color: #8A8072;
+    color: #8a8072;
     margin: 0 0 8px 0;
   }
 
   .outfit-name {
     font-size: 14px;
-    color: #3A322C;
+    color: #3a322c;
     font-weight: 500;
     margin: 0;
   }
@@ -416,8 +516,8 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
   }
 
   .testing-ui {
-    background-color: #E3DED2;
-    border: 1px solid #CFC6B3;
+    background-color: #e3ded2;
+    border: 1px solid #cfc6b3;
     border-radius: 16px;
     padding: 24px;
     margin-top: 16px;
@@ -426,7 +526,7 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
   .region-label {
     font-size: 12px;
     letter-spacing: 0.04em;
-    color: #8A8072;
+    color: #8a8072;
     margin: 0 0 16px 0;
   }
 
@@ -437,7 +537,7 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
   }
 
   button {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 14px;
     padding: 10px 14px;
     border-radius: 8px;
@@ -446,161 +546,164 @@ $: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
   }
 
   .btn-primary {
-    background-color: #6B7059;
-    color: #FBF9F5;
+    background-color: #6b7059;
+    color: #fbf9f5;
   }
 
   .btn-secondary {
     background-color: transparent;
-    border: 1px solid #8A8072;
-    color: #5C5449;
+    border: 1px solid #8a8072;
+    color: #5c5449;
   }
 
   .info-text {
     font-size: 13px;
-    color: #5C5449;
+    color: #5c5449;
     margin-top: 14px;
     line-height: 1.5;
   }
 
   .laundry-section {
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid #D8CFBE;
-}
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid #d8cfbe;
+  }
 
-.laundry-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-}
+  .laundry-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
 
-.section-label {
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: #8A8072;
-  margin: 0;
-}
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: #8a8072;
+    margin: 0;
+  }
 
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #6B7059;
-}
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #6b7059;
+  }
 
-.status-dot.low {
-  background-color: #B25D45;
-}
+  .status-dot.low {
+    background-color: #b25d45;
+  }
 
-.laundry-list {
-  max-height: 130px;
-  overflow-y: auto;
-  padding-right: 8px;
-}
+  .laundry-list {
+    max-height: 130px;
+    overflow-y: auto;
+    padding-right: 8px;
+  }
 
-.laundry-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  color: #3A322C;
-  padding: 6px 0;
-  border-bottom: 1px solid #EDE7DC;
-}
+  .laundry-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #3a322c;
+    padding: 6px 0;
+    border-bottom: 1px solid #ede7dc;
+  }
 
-.laundry-counts {
-  color: #5C5449;
-}
+  .laundry-counts {
+    color: #5c5449;
+  }
 
-.laundry-alert {
-  font-size: 13px;
-  color: #B25D45;
-  margin-top: 10px;
-}
-.weather-panel {
-  margin-bottom: 20px;
-}
+  .laundry-alert {
+    font-size: 13px;
+    color: #b25d45;
+    margin-top: 10px;
+  }
+  .weather-panel {
+    margin-bottom: 20px;
+  }
 
-.laundry-section {
-  margin-top: 0;
-  padding-top: 0;
-  border-top: none;
-}
+  .laundry-section {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
 
-.catalog-panel {
-  margin-top: 20px;
-}
+  .catalog-panel {
+    margin-top: 20px;
+  }
 
-.active-tags, .tag-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
-}
+  .active-tags,
+  .tag-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
 
-.tag-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background-color: #EDE7DC;
-  border: 1px solid #D8CFBE;
-  border-radius: 20px;
-  padding: 6px 12px;
-  font-size: 13px;
-  color: #5C5449;
-  cursor: pointer;
-}
+  .tag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #ede7dc;
+    border: 1px solid #d8cfbe;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: #5c5449;
+    cursor: pointer;
+  }
 
-.tag-chip.active {
-  background-color: #6B7059;
-  color: #FBF9F5;
-  border-color: #6B7059;
-}
+  .tag-chip.active {
+    background-color: #6b7059;
+    color: #fbf9f5;
+    border-color: #6b7059;
+  }
 
-.tag-remove {
-  background: none;
-  border: none;
-  color: inherit;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 0;
-}
+  .tag-remove {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+  }
 
-.catalog-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 16px;
-}
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 16px;
+  }
 
-.catalog-item {
-  text-align: center;
-}
+  .catalog-item {
+    text-align: center;
+  }
 
-.item-photo-placeholder {
-  background-color: #EDE7DC;
-  border: 1px solid #D8CFBE;
-  border-radius: 8px;
-  height: 70px;
-  margin-bottom: 6px;
-}
+  .item-photo {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border: 1px solid #d8cfbe;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    display: block;
+  }
 
-.item-name {
-  font-size: 13px;
-  color: #3A322C;
-  margin: 0;
-}
+  .item-name {
+    font-size: 13px;
+    color: #3a322c;
+    margin: 0;
+  }
 
-.item-last-worn {
-  font-size: 11px;
-  color: #8A8072;
-  margin: 2px 0 0 0;
-}
+  .item-last-worn {
+    font-size: 11px;
+    color: #8a8072;
+    margin: 2px 0 0 0;
+  }
 
-.no-results {
-  font-size: 13px;
-  color: #8A8072;
-  margin-top: 12px;
-}
+  .no-results {
+    font-size: 13px;
+    color: #8a8072;
+    margin-top: 12px;
+  }
 </style>
