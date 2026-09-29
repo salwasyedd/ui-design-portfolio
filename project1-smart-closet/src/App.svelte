@@ -28,24 +28,28 @@
       text: "It's chilly: wear the gray hoodie.",
       outfit: "Gray hoodie + jeans",
       img: "/src/lib/catalog/gray-hoodie.jpg",
+      condition: "breezy-cloudy",
     },
     {
       temp: 62,
       text: "Mild out: a light sweater works.",
       outfit: "Green sweater + jeans",
       img: "/src/lib/catalog/green-sweater.jpg",
+      condition: "cloudy",
     },
     {
       temp: 78,
       text: "Warm today: go with a t-shirt.",
       outfit: "White t-shirt + shorts",
       img: "/src/lib/catalog/white-tshirt.jpg",
+      condition: "sunny",
     },
     {
       temp: 33,
       text: "Cold! Grab the winter coat.",
       outfit: "Winter coat + scarf",
       img: "/src/lib/catalog/winter-coat.jpg",
+      condition: "snow",
     },
   ];
 
@@ -90,7 +94,6 @@
     );
   }
 
-  // Closet catalog
   const catalogItems = [
     {
       name: "Gray Hoodie",
@@ -205,13 +208,119 @@
 
     <p class="greeting">{getGreeting()}</p>
 
-    <!-- device ui region -->
     <section class="device-ui weather-panel">
       <div class="weather-row">
         <div class="weather-info">
           <div class="temp-row">
             <span class="temp">{currentSuggestion.temp}&deg;</span>
-            <span class="weather-icon"></span>
+            <span class="weather-icon">
+              {#if currentSuggestion.condition === "sunny"}
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  ><circle cx="12" cy="12" r="5" /><line
+                    x1="12"
+                    y1="1"
+                    x2="12"
+                    y2="3"
+                  /><line x1="12" y1="21" x2="12" y2="23" /><line
+                    x1="4.22"
+                    y1="4.22"
+                    x2="5.64"
+                    y2="5.64"
+                  /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line
+                    x1="1"
+                    y1="12"
+                    x2="3"
+                    y2="12"
+                  /><line x1="21" y1="12" x2="23" y2="12" /><line
+                    x1="4.22"
+                    y1="19.78"
+                    x2="5.64"
+                    y2="18.36"
+                  /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" /></svg
+                >
+              {:else if currentSuggestion.condition === "cloudy"}
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  ><path
+                    d="M17.5 19H9a5 5 0 1 1 1-9.9A6 6 0 0 1 21 12a4 4 0 0 1-3.5 7z"
+                  /></svg
+                >
+              {:else if currentSuggestion.condition === "breezy-cloudy"}
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  ><path
+                    d="M14.5 16H6a4 4 0 1 1 .8-7.9A5 5 0 0 1 17 10a3.5 3.5 0 0 1-2.5 6z"
+                  /><line x1="3" y1="19" x2="11" y2="19" /><line
+                    x1="3"
+                    y1="21.5"
+                    x2="9"
+                    y2="21.5"
+                  /></svg
+                >
+              {:else if currentSuggestion.condition === "snow"}
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <g>
+                    <line x1="12" y1="12" x2="12" y2="3" />
+                    <line x1="12" y1="8" x2="10.3" y2="6.2" />
+                    <line x1="12" y1="8" x2="13.7" y2="6.2" />
+                    <line x1="12" y1="5.3" x2="11" y2="4.2" />
+                    <line x1="12" y1="5.3" x2="13" y2="4.2" />
+                  </g>
+                  <g transform="rotate(60 12 12)">
+                    <line x1="12" y1="12" x2="12" y2="3" />
+                    <line x1="12" y1="8" x2="10.3" y2="6.2" />
+                    <line x1="12" y1="8" x2="13.7" y2="6.2" />
+                    <line x1="12" y1="5.3" x2="11" y2="4.2" />
+                    <line x1="12" y1="5.3" x2="13" y2="4.2" />
+                  </g>
+                  <g transform="rotate(120 12 12)">
+                    <line x1="12" y1="12" x2="12" y2="3" />
+                    <line x1="12" y1="8" x2="10.3" y2="6.2" />
+                    <line x1="12" y1="8" x2="13.7" y2="6.2" />
+                    <line x1="12" y1="5.3" x2="11" y2="4.2" />
+                    <line x1="12" y1="5.3" x2="13" y2="4.2" />
+                  </g>
+                  <g transform="rotate(180 12 12)">
+                    <line x1="12" y1="12" x2="12" y2="3" />
+                    <line x1="12" y1="8" x2="10.3" y2="6.2" />
+                    <line x1="12" y1="8" x2="13.7" y2="6.2" />
+                    <line x1="12" y1="5.3" x2="11" y2="4.2" />
+                    <line x1="12" y1="5.3" x2="13" y2="4.2" />
+                  </g>
+                  <g transform="rotate(240 12 12)">
+                    <line x1="12" y1="12" x2="12" y2="3" />
+                    <line x1="12" y1="8" x2="10.3" y2="6.2" />
+                    <line x1="12" y1="8" x2="13.7" y2="6.2" />
+                    <line x1="12" y1="5.3" x2="11" y2="4.2" />
+                    <line x1="12" y1="5.3" x2="13" y2="4.2" />
+                  </g>
+                  <g transform="rotate(300 12 12)">
+                    <line x1="12" y1="12" x2="12" y2="3" />
+                    <line x1="12" y1="8" x2="10.3" y2="6.2" />
+                    <line x1="12" y1="8" x2="13.7" y2="6.2" />
+                    <line x1="12" y1="5.3" x2="11" y2="4.2" />
+                    <line x1="12" y1="5.3" x2="13" y2="4.2" />
+                  </g>
+                </svg>
+              {/if}
+            </span>
           </div>
           <p class="suggestion-text">{currentSuggestion.text}</p>
         </div>
@@ -253,11 +362,10 @@
         {/if}
       </div>
 
-      <!-- level 2+ controls will be added here -->
     </section>
 
-    <div class="testing-toggle-row">
-      <button class="link-btn" on:click={toggleCatalog}>
+    <div class="outfit-btn-row">
+      <button class="btn-outfit" on:click={toggleCatalog}>
         {showCatalog ? "Close Catalog" : "Build an Outfit"}
       </button>
     </div>
@@ -331,7 +439,6 @@
           </p>
         {/if}
 
-        <!-- test buttons for level 1+ will be added here -->
       </aside>
     {/if}
   </div>
@@ -360,8 +467,8 @@
     justify-content: space-between;
     align-items: baseline;
     border-bottom: 1px solid #d8cfbe;
-    padding-bottom: 20px;
-    margin-bottom: 32px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
   }
 
   h1 {
@@ -429,7 +536,7 @@
     font-family: "Fraunces", serif;
     font-size: 22px;
     color: #3a322c;
-    margin: 0 0 16px 0;
+    margin: 0 0 10px 0;
   }
 
   .device-ui {
@@ -448,11 +555,16 @@
 
   .weather-info {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   .temp-row {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
   }
 
@@ -464,16 +576,21 @@
   }
 
   .weather-icon {
-    width: 22px;
-    height: 22px;
-    border: 2px solid #a9967c;
-    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    color: #a9967c;
+    display: inline-flex;
+  }
+
+  .weather-icon svg {
+    width: 100%;
+    height: 100%;
   }
 
   .suggestion-text {
-    font-size: 15px;
+    font-size: 19px;
     color: #5c5449;
-    margin-top: 8px;
+    margin-top: 16px;
   }
 
   .outfit-box {
@@ -513,6 +630,25 @@
   .testing-toggle-row {
     text-align: center;
     margin-top: 20px;
+  }
+
+  .outfit-btn-row {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .btn-outfit {
+    width: 100%;
+    max-width: 320px;
+    background-color: #6b7059;
+    color: #fbf9f5;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 20px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
   }
 
   .testing-ui {
