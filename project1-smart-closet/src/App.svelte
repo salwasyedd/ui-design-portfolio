@@ -68,6 +68,41 @@
         : item
     );
   }
+
+  // Closet catalog
+const catalogItems = [
+  { name: "Gray Hoodie", tags: ["casual", "winter"], lastWorn: "2 days ago" },
+  { name: "White T-Shirt", tags: ["casual", "summer"], lastWorn: "1 day ago" },
+  { name: "Work Blazer", tags: ["work", "formal"], lastWorn: "1 week ago" },
+  { name: "Blue Jeans", tags: ["casual"], lastWorn: "3 days ago" },
+  { name: "Winter Coat", tags: ["winter", "formal"], lastWorn: "1 month ago" },
+  { name: "Red Sweater", tags: ["red", "winter"], lastWorn: "5 days ago" },
+  { name: "Black Dress Pants", tags: ["work", "formal"], lastWorn: "4 days ago" },
+  { name: "Sneakers", tags: ["casual", "summer"], lastWorn: "today" }
+];
+
+let activeTags = [];
+let showCatalog = false;
+
+function toggleCatalog() {
+  showCatalog = !showCatalog;
+}
+
+function addTag(tag) {
+  if (!activeTags.includes(tag)) {
+    activeTags = [...activeTags, tag];
+  }
+}
+
+function removeTag(tag) {
+  activeTags = activeTags.filter(t => t !== tag);
+}
+
+$: filteredItems = activeTags.length === 0
+  ? catalogItems
+  : catalogItems.filter(item => activeTags.every(tag => item.tags.includes(tag)));
+
+$: allTags = [...new Set(catalogItems.flatMap(item => item.tags))];
 </script>
 
 <main>
@@ -136,8 +171,51 @@
         {/if}
       </div>
 
-      <!-- level 2+ controls will be added here -->
+    <!-- level 2+ controls will be added here -->
     </section>
+
+    <div class="testing-toggle-row">
+      <button class="link-btn" on:click={toggleCatalog}>
+        {showCatalog ? "Close Catalog" : "Build an Outfit"}
+      </button>
+    </div>
+
+    {#if showCatalog}
+    <section class="device-ui catalog-panel">
+      <p class="section-label">Your Closet</p>
+
+      <div class="active-tags">
+        {#each activeTags as tag}
+          <span class="tag-chip active">
+            {tag}
+            <button class="tag-remove" on:click={() => removeTag(tag)}>&times;</button>
+          </span>
+        {/each}
+      </div>
+
+      <div class="tag-options">
+        {#each allTags as tag}
+          {#if !activeTags.includes(tag)}
+            <button class="tag-chip" on:click={() => addTag(tag)}>{tag}</button>
+          {/if}
+        {/each}
+      </div>
+
+      <div class="catalog-grid">
+        {#each filteredItems as item}
+          <div class="catalog-item">
+            <div class="item-photo-placeholder"></div>
+            <p class="item-name">{item.name}</p>
+            <p class="item-last-worn">Last worn: {item.lastWorn}</p>
+          </div>
+        {/each}
+      </div>
+
+      {#if filteredItems.length === 0}
+        <p class="no-results">No items match these tags.</p>
+      {/if}
+    </section>
+  {/if}
 
     <div class="testing-toggle-row">
       <button class="link-btn" on:click={toggleTestingMode}>
@@ -448,5 +526,81 @@
   margin-top: 0;
   padding-top: 0;
   border-top: none;
+}
+
+.catalog-panel {
+  margin-top: 20px;
+}
+
+.active-tags, .tag-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #EDE7DC;
+  border: 1px solid #D8CFBE;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #5C5449;
+  cursor: pointer;
+}
+
+.tag-chip.active {
+  background-color: #6B7059;
+  color: #FBF9F5;
+  border-color: #6B7059;
+}
+
+.tag-remove {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.catalog-item {
+  text-align: center;
+}
+
+.item-photo-placeholder {
+  background-color: #EDE7DC;
+  border: 1px solid #D8CFBE;
+  border-radius: 8px;
+  height: 70px;
+  margin-bottom: 6px;
+}
+
+.item-name {
+  font-size: 13px;
+  color: #3A322C;
+  margin: 0;
+}
+
+.item-last-worn {
+  font-size: 11px;
+  color: #8A8072;
+  margin: 2px 0 0 0;
+}
+
+.no-results {
+  font-size: 13px;
+  color: #8A8072;
+  margin-top: 12px;
 }
 </style>
