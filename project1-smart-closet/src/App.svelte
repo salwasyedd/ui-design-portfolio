@@ -27,28 +27,28 @@
       temp: 45,
       text: "It's chilly: wear the gray hoodie.",
       outfit: "Gray hoodie + jeans",
-      img: "/src/lib/catalog/gray-hoodie.jpg",
+      img: "/catalog/gray-hoodie.jpg",
       condition: "breezy-cloudy",
     },
     {
       temp: 62,
       text: "Mild out: a light sweater works.",
       outfit: "Green sweater + jeans",
-      img: "/src/lib/catalog/green-sweater.jpg",
+      img: "/catalog/green-sweater.jpg",
       condition: "cloudy",
     },
     {
       temp: 78,
       text: "Warm today: go with a t-shirt.",
       outfit: "White t-shirt + shorts",
-      img: "/src/lib/catalog/white-tshirt.jpg",
+      img: "/catalog/white-tshirt.jpg",
       condition: "sunny",
     },
     {
       temp: 33,
       text: "Cold! Grab the winter coat.",
       outfit: "Winter coat + scarf",
-      img: "/src/lib/catalog/winter-coat.jpg",
+      img: "/catalog/winter-coat.jpg",
       condition: "snow",
     },
   ];
@@ -99,49 +99,49 @@
       name: "Gray Hoodie",
       tags: ["casual", "winter"],
       lastWorn: "2 days ago",
-      img: "/src/lib/catalog/gray-hoodie.jpg",
+      img: "/catalog/gray-hoodie.jpg",
     },
     {
       name: "White T-Shirt",
       tags: ["casual", "summer"],
       lastWorn: "1 day ago",
-      img: "/src/lib/catalog/white-tshirt.jpg",
+      img: "/catalog/white-tshirt.jpg",
     },
     {
       name: "Work Blazer",
       tags: ["work", "formal"],
       lastWorn: "1 week ago",
-      img: "/src/lib/catalog/work-blazer.jpg",
+      img: "/catalog/work-blazer.jpg",
     },
     {
       name: "Blue Jeans",
       tags: ["casual"],
       lastWorn: "3 days ago",
-      img: "/src/lib/catalog/blue-jeans.jpg",
+      img: "/catalog/blue-jeans.jpg",
     },
     {
       name: "Winter Coat",
       tags: ["winter", "formal"],
       lastWorn: "1 month ago",
-      img: "/src/lib/catalog/winter-coat.jpg",
+      img: "/catalog/winter-coat.jpg",
     },
     {
       name: "Green Sweater",
       tags: ["green", "winter"],
       lastWorn: "5 days ago",
-      img: "/src/lib/catalog/green-sweater.jpg",
+      img: "/catalog/green-sweater.jpg",
     },
     {
       name: "Black Dress Pants",
       tags: ["work", "formal"],
       lastWorn: "4 days ago",
-      img: "/src/lib/catalog/black-dress-pants.jpg",
+      img: "/catalog/black-dress-pants.jpg",
     },
     {
       name: "Sneakers",
       tags: ["casual", "summer"],
       lastWorn: "today",
-      img: "/src/lib/catalog/sneakers.jpg",
+      img: "/catalog/sneakers.jpg",
     },
   ];
 
@@ -196,7 +196,7 @@
     {#if showPlacement}
       <div class="placement-block">
         <img
-          src="/src/lib/hybrid-sketch.jpg"
+          src="/hybrid-sketch.jpg"
           alt="Hybrid sketch showing the smart closet UI overlaid on the physical closet door"
           class="placement-img"
         />
