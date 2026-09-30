@@ -62,6 +62,16 @@ Built as a single-page Svelte app (`App.svelte`).
 - Device UI region: weather/outfit panel, laundry status panel, and the "Build an Outfit" catalog panel (toggled open/closed)
 - Testing UI region: separate from the Device UI, lets a reviewer trigger state changes (`getNewSuggestion`, `simulateWear`, `doLaundry`) to see how the Device UI responds without needing real sensors or hardware
 
+## Level 2+ Feature: Option 1 (Complex Selections)
+
+For the Levels 2-4 requirement, I chose **Option 1: Enable the user to input a complex set of selections**, implemented as the **Build an Outfit catalog**.
+
+The Level 1 interface only shows a single auto-generated outfit suggestion based on the current weather — it doesn't let the user browse or select from their full wardrobe. The catalog addresses this by letting users input a more complex, multi-part selection: choosing *any combination* of tags (ex. "casual" + "winter") to narrow down exactly which items they want to see, rather than being limited to one preset suggestion at a time.
+
+- **Clear selection feedback:** Active filter tags are shown as removable chips at the top of the panel, so the user can always see exactly which filters are currently applied.
+- **Quick feedback on selections:** The catalog grid updates immediately as tags are added or removed, showing only items matching every active tag; a "No items match these tags" message appears if the combination returns nothing.
+- **Additional context per item:** Each result shows a photo and a "last worn" timestamp, giving the user more information to base their final choice on beyond just the filter match.
+
 ## AI Usage
 
 AI (Claude) was used throughout this project in the following ways:
