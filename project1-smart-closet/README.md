@@ -91,6 +91,13 @@ AI (Claude) was used throughout this project in the following ways:
 - **Live weather data** — Weather conditions are currently mocked via a fixed set of `suggestions`; a real version would pull live temperature data for the user's location.
 - **AI-generated outfit preview on the user** — Rather than showing outfit photos as flat-lay images, a future version could use an AI image generation model to render the suggested or built outfit as if worn by the user (ex. from an uploaded photo), giving a much more realistic sense of fit and appearance before getting dressed.
 
+## Demo Video
+
+[Watch my demo video](https://drive.google.com/file/d/1_ffK-8PYkv9-8b3MuW36NrQ20DVbu9im/view?usp=sharing) — a walkthrough covering:
+- Project name and author
+- The project components (weather/outfit suggestion, laundry tracking, outfit catalog, testing panel)
+- A live demo of each feature in action, using the Testing Panel to trigger state changes
+
 ## Running locally
 npm install
 npm run dev
