@@ -98,6 +98,12 @@ AI (Claude) was used throughout this project in the following ways:
 - The project components (weather/outfit suggestion, laundry tracking, outfit catalog, testing panel)
 - A live demo of each feature in action, using the Testing Panel to trigger state changes
 
+## Links
+
+- **Source code:** [GitHub repository](https://github.com/salwasyedd/ui-design-portfolio/tree/main/project1-smart-closet)
+- **Live app:** [https://smart-closet-salwasyed.vercel.app/](https://smart-closet-salwasyed.vercel.app/)
+- **Design write-up:** [design/design.md](design/design.md)
+
 ## Running locally
 npm install
 npm run dev
